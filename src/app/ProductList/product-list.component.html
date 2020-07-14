@@ -1,0 +1,62 @@
+<div class="box-header center vertical-margin-big">
+    <div class="header-txt">Lista de productos</div>
+    <img src="assets/icons/add_circle_outline-white-18dp.svg" class="add-btn">
+</div>
+
+<div class="box center">
+    <table mat-table [dataSource]="tableSource" class="fullwidth" *ngIf="tableSource">
+        <!-- Column definitions -->
+        <ng-container matColumnDef="image">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+            <td mat-cell *matCellDef="let data" style="width:85px" [@clickOnProduct]="clickedEl === data.id ? 'clicked' : 'idle'">
+                <img [src]="data.image" class="table-img">
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+            <td mat-cell *matCellDef="let data" [@clickOnProduct]="clickedEl === data.id ? 'clicked' : 'idle'"> {{data.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="sku">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> SKU </th>
+            <td mat-cell *matCellDef="let data" [@clickOnProduct]="clickedEl === data.id ? 'clicked' : 'idle'"> {{data.sku}} </td>
+        </ng-container>
+        <ng-container matColumnDef="barcode">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Código de barras </th>
+            <td mat-cell *matCellDef="let data" [@clickOnProduct]="clickedEl === data.id ? 'clicked' : 'idle'"> {{data.barcode}} </td>
+        </ng-container>
+        <ng-container matColumnDef="enabled">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+            <td mat-cell *matCellDef="let data" [@clickOnProduct]="clickedEl === data.id ? 'clicked' : 'idle'">
+                <mat-slide-toggle [checked]="data.enabled" (change)="data.enabled = !data.enabled">
+                </mat-slide-toggle>
+            </td>
+        </ng-container>
+
+        <!-- Rendered Elements -->
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay" (click)="clickedEl = myRowData.id; viewProduct(myRowData);">
+        </tr>
+    </table>
+
+    <!-- Table controls-->
+    <div class="table-controls" *ngIf="tableSource">
+        <label>
+            Elementos por página
+        </label>
+        <select class="page-size-selector" (change)="changePageSize($event.target.value)">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+        </select>
+
+        <label class="pager-info">
+            {{ 1*currentPage }}-{{currentPage * pageLimit > tableSource.length ? tableSource.length : currentPage+1 * pageLimit}}
+            de {{ tableSource.length}}
+        </label>
+        <!-- Nota: Angular todavía no soporta los operadores "++" y "--" en el HTML :( -->
+        <img (click)="currentPage > 0 ? currentPage = currentPage-1 : null; updateTable();"
+            style="margin-left: 25px; cursor: pointer" src="assets/icons/keyboard_arrow_left-black-18dp.svg">
+        <img (click)="currentPage*pageLimit < tableSource.length  ? currentPage = currentPage+1 : null;  updateTable();"
+            style="margin-left: 10px; cursor: pointer" src="assets/icons/keyboard_arrow_right-black-18dp.svg">
+    </div>
+</div>

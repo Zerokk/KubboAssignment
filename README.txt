@@ -1,7 +1,5 @@
-Para usar, se debe clonar el repositorio, ejecutar
+# ⚡️ Kubbo Frontend Assignment ⚡️
 
->> npm install
+In order to test this project, you must have `@angular/cli` installed.
 
-Y, finalmente:
-
->> ng serve
+Clone the project into your machine, and use `npm install` to install the dependencies. Afterwards, just use `ng serve` and check the project. 

@@ -1,0 +1,18 @@
+.outer{
+    display:inline-block;
+    height: 18px;
+    border-radius: 25px 25px 25px 25px;
+    background-color: whitesmoke;
+    border: 1px solid lightgray;
+    width: 100%;
+}
+
+.inner{
+    display:inline-block;
+    border-radius: 25px 0px 0px 25px;
+    background-color: #6E5EF8;
+    width: 1px;
+    height: 15px;
+    vertical-align: sub;
+    margin-left: 1px;
+}

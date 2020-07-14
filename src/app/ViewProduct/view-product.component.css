@@ -1,0 +1,57 @@
+@media(max-width: 1023px){
+    .content-wrapper{
+        width: 85%;
+    }
+    .table-box-fix{
+        margin-left: 2%;
+        float: right;
+        width: 55%;
+    }
+}
+
+@media(min-width: 1024px){
+    .content-wrapper{
+        width: 65%;
+
+    }
+    .table-box-fix{
+        float: right;
+        width: 71%;
+    }
+}
+
+.label{
+    margin-top: 10px;
+    margin-left: 15px;
+    letter-spacing: 0.058em;
+    font-size: 17px;
+    line-height: 25px;
+}
+
+.column{
+    width: 45%;
+    padding: 5px;
+    float:left;
+}
+
+.img{
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+}
+
+.label-txt{
+    font-size:14px;
+    color: gray;
+}
+
+.col-txt{
+    font-weight: 600;
+}
+
+.packaging-box{
+    font-size:16px;
+    margin-top:15px;
+    margin-left:35px;
+    padding-bottom: 30px;
+}

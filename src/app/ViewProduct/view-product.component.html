@@ -1,0 +1,85 @@
+<div class="box-header center vertical-margin-big">
+    <img src="assets/icons/Icon_back_w.svg" class="header-icon-left" (click)="goBack()">
+    <div class="header-txt"> {{ product ? product.name : 'Cargando...' }} </div>
+    <img src="assets/icons/Icon_edit_w.svg" class="header-icon">
+</div>
+
+<div class="content-wrapper center">
+    <div class="side-box inline " *ngIf="product">
+        <p class="brand-color-txt label">Resumen del producto</p>
+        <div class="column" style="text-align:center">
+            <img [src]="product.image" class="img">
+        </div>
+        <div class="column">
+            <label class="label-txt">Nombre</label>
+            <p class="col-txt">{{ product.name }}</p>
+            <label class="label-txt">SKU</label>
+            <p class="col-txt">{{ product.sku }}</p>
+            <label class="label-txt">Código de barras</label>
+            <p class="col-txt">{{ product.barcode }}</p>
+            <label class="label-txt">Precio</label>
+            <p class="col-txt">{{ product.price }}</p>
+
+        </div>
+    </div>
+
+    <div class="box inline table-box-fix ">
+        <p class="brand-color-txt label">Inventario</p>
+        <table mat-table [dataSource]="tableSource" class="fullwidth" *ngIf="tableSource?.length > 0">
+            <ng-container matColumnDef="city">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Ciudad </th>
+                <td mat-cell *matCellDef="let data"> {{ data.city }} </td>
+            </ng-container>
+            <ng-container matColumnDef="country">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> País </th>
+                <td mat-cell *matCellDef="let data"> {{data.country}} </td>
+            </ng-container>
+            <ng-container matColumnDef="warehouseName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Almacén </th>
+                <td mat-cell *matCellDef="let data"> {{data.warehouseName}} </td>
+            </ng-container>
+            <ng-container matColumnDef="stock">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Stock disponible </th>
+                <td mat-cell *matCellDef="let data"> {{data.quantity }} uds. </td>
+            </ng-container>
+            <ng-container matColumnDef="stock-progress">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+
+                <td mat-cell *matCellDef="let data">
+                    <app-custom-progress-bar *ngIf="totalStock" [total]="totalStock" [current]="data.quantity">
+                    </app-custom-progress-bar>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay">
+            </tr>
+        </table>
+        <!-- In case there are no stocks to show... -->
+        <div *ngIf="(!tableSource || tableSource.length == 0) && finished" class="label">
+            Este producto no se encuentra en ninguno de nuestros almacenes ahora mismo
+        </div>
+    </div>
+    <div class="side-box inline " style="margin-top: 25px">
+        <p class="brand-color-txt label">Requerimientos del packaging</p>
+        <div class="packaging-box">
+            <mat-radio-group aria-label="Select an option">
+                <mat-radio-button [labelPosition]="before" value="1">Packaging personalizado</mat-radio-button>
+                <br>
+                <mat-radio-button [labelPosition]="before" value="2">Plegable</mat-radio-button>
+                <br>
+                <mat-radio-button [labelPosition]="before" value="3">Envío en el propio contenedor</mat-radio-button>
+                <br>
+                <mat-radio-button [labelPosition]="before" value="4">Flyer promocional</mat-radio-button>
+                <br>
+                <mat-radio-button [labelPosition]="before" value="5">Obsequio promocional</mat-radio-button>
+                <br>
+                <mat-radio-button [labelPosition]="before" value="6">Peligroso</mat-radio-button>
+                <br>
+                <mat-radio-button [labelPosition]="before" value="7">Frágil</mat-radio-button>
+            </mat-radio-group>
+
+        </div>
+
+
+    </div>
+</div>
